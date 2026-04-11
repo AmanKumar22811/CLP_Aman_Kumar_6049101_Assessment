@@ -23,9 +23,6 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	@CircuitBreaker(name = "orderservice", fallbackMethod = "fallback")
 	public OrderResponse createOrder(Long userId, Long productId, int quantity) {
-		if (quantity <= 0) {
-			throw new RuntimeException("Quantity must be > 0");
-		}
 
 		User user = restTemplate.getForObject("http://USER/users/" + userId, User.class);
 
